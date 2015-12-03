@@ -1,0 +1,56 @@
+create user if not exist
+{contact_key: Contact }
+
+
+// ----------------------------------------------------------------- New Contact and Session Request
+var contact_id="asdlfkjhvbnjndjsd";
+var contact_pub_key="------------ RSA ---------- ..."
+
+var session_id="asdlfkjhvbnjndjsd";
+var salt="asdlfkjhvbnjndjsd";
+
+var alice = Contact.create(contact_id,contact_pub_key);
+
+alice.add_session(session_id, {salt:String, end_date:Date})
+Contact.add_session(contact_id, session_id, {salt:String, end_date:Date})
+
+var current_session_id = alice.get_session_id(encrypted_message)
+var current_session_id = Contact.get_session_id(contact_id, encrypted_message)
+
+var decrypted_message = alice.decrypt(current_session_id, encrypted_message)
+var decrypted_message = Contact.decrypt(contact_id, current_session_id, encrypted_message)
+
+// ----------------------------------------------------------------- Generating Session Request For Existing Contact
+
+// Add session will check if there is session info in parameters, if not it will generate a new session
+alice.add_session(end_date) 
+Contact.add_session(contact_id,  end_date)
+
+// ----------------------------------------------------------------- Encrypt using our damn private key
+
+
+
+
+
+Contact class 
+	public_key
+	sessions: {session_id: {end_date:DateTime, salt: String} }
+
+
+	decrypt(encrypted_message) 
+		decrypt 
+		return message_cleartext
+	encrypt()
+	getPubKey()
+
+
+find contact(contact_key){
+	returns contact;
+}
+find session(contact_key, session_key) {
+	return public key that is then transformed by session key
+}
+
+key
+certificate 
+session keys - array of strings
